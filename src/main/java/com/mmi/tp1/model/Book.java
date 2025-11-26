@@ -9,6 +9,7 @@ public class Book {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private String title;
 
     @Column(unique = true)
@@ -29,9 +30,16 @@ public class Book {
     public Book(String title, String isbn, int year, Category category, Author author) {
         this.title = title;
         this.isbn = isbn;
+        checkYear(year);
         this.year = year;
         this.category = category;
         this.author = author;
+    }
+
+    private void checkYear(int year) {
+        if (year < 1450 || year > 2025) {
+            throw new IllegalArgumentException("Year must be between 1450 and 2025");
+        }
     }
 
     public Author getAuthor() {
@@ -55,6 +63,7 @@ public class Book {
     }
 
     public void setYear(int year) {
+        checkYear(year);
         this.year = year;
     }
 

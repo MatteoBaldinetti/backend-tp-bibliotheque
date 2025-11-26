@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/book")
+@CrossOrigin(origins = "*")
 public class BookController {
 
     @Autowired
