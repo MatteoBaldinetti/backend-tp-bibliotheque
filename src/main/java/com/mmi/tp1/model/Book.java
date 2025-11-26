@@ -29,7 +29,7 @@ public class Book {
 
     public Book(String title, String isbn, int year, Category category, Author author) {
         this.title = title;
-        this.isbn = isbn;
+        this.isbn = checkIsbn(isbn);
         checkYear(year);
         this.year = year;
         this.category = category;
@@ -39,6 +39,14 @@ public class Book {
     private void checkYear(int year) {
         if (year < 1450 || year > 2025) {
             throw new IllegalArgumentException("Year must be between 1450 and 2025");
+        }
+    }
+
+    private String checkIsbn(String isbn) {
+        if (isbn.length() == 13 && (isbn.startsWith("978") || isbn.startsWith("979")) && isbn.matches("\\d+")) {
+            return isbn;
+        } else {
+            throw new IllegalArgumentException("ISBN must be 13 characters long or incorrect format");
         }
     }
 
@@ -72,7 +80,7 @@ public class Book {
     }
 
     public void setIsbn(String isbn) {
-        this.isbn = isbn;
+        this.isbn = checkIsbn(isbn);
     }
 
     public String getTitle() {
