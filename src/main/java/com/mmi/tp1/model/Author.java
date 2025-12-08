@@ -25,7 +25,7 @@ public class Author {
         this.birthYear = birthYear;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
