@@ -1,4 +1,4 @@
-# TP - SushiFast - Vincent ROURE & Mattéo BALDINETTI
+# TP - Bibliothèque - Vincent ROURE, Mattéo BALDINETTI & Ken DINH
 ## Contexte
 Travaux pratiques réalisé en 3ème année de BUT Métiers du Multimédia et de l'Internet avec la matière Dev-Back.
 
@@ -18,18 +18,18 @@ backend-tp-bibliotheque/
 ├── src/
 │   ├── main/
 │   │   ├── java/com/mmi/tp1/
-│   │   │   ├── config/        # Contient les classes de configuration (ex : gestion de l’API Key)
-│   │   │   ├── controller/    # Contrôleurs REST exposant les endpoints de l’API
-│   │   │   ├── filter/        # Filtres appliqués aux requêtes HTTP (ex : ajout d’en-têtes)
-│   │   │   ├── model/         # Classes modèles représentant les entités du projet
-│   │   │   ├── repository/    # Interfaces JPA permettant l’accès à la base de données
-│   │   │   ├── service/       # Logique métier utilisée par les contrôleurs
-│   │   │   └── Tp1Application.java  # Classe principale lançant l’application Spring Boot
+│   │   │   ├── config/        			# Contient les classes de configuration (ex : gestion de l’API Key)
+│   │   │   ├── controller/    			# Contrôleurs REST exposant les endpoints de l’API
+│   │   │   ├── filter/        			# Filtres appliqués aux requêtes HTTP (ex : ajout d’en-têtes)
+│   │   │   ├── model/         			# Classes modèles représentant les entités du projet
+│   │   │   ├── repository/    			# Interfaces JPA permettant l’accès à la base de données
+│   │   │   ├── service/       			# Logique métier utilisée par les contrôleurs
+│   │   │   └── Tp1Application.java  	# Classe principale lançant l’application Spring Boot
 │   │   └── resources/
 │   │       ├── application.properties  # Configuration de l’application (BDD, ports, etc.)
 │   │       └── ...                     # Autres ressources utilisées par le projet
 │
-└── pom.xml      # Dépendances Maven et configuration du projet
+└── pom.xml      						# Dépendances Maven et configuration du projet
 ```
 	    
 ## Utilisation
