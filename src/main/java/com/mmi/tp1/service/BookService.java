@@ -6,7 +6,6 @@ import com.mmi.tp1.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import java.util.List;
 
@@ -48,8 +47,6 @@ public class BookService {
             Integer page,
             Integer size
     ) {
-        System.out.println(page);
-        System.out.println(size);
         Iterable<Book> books = bookRepository.findAll();
 
         List<String> allowedSortFields = List.of("title", "year", "category", "id");
