@@ -44,36 +44,46 @@ public class BookService {
             Integer yearFrom,
             Integer yearTo,
             String sort,
-            String direction
+            String direction,
+            Integer page,
+            Integer size
     ) {
+        System.out.println(page);
+        System.out.println(size);
         Iterable<Book> books = bookRepository.findAll();
 
         List<String> allowedSortFields = List.of("title", "year", "category", "id");
         if (!allowedSortFields.contains(sort)) {
             sort = "title";
         }
-
         String finalSort = sort;
-        return StreamSupport.stream(books.spliterator(), false)
+
+        List<Book> filtered = StreamSupport.stream(books.spliterator(), false)
                 .filter(book -> title == null || book.getTitle().toLowerCase().contains(title.toLowerCase()))
                 .filter(book -> authorId == null || (book.getAuthor() != null && book.getAuthor().getId().equals(authorId)))
                 .filter(book -> category == null || category.equals(book.getCategory()))
                 .filter(book -> yearFrom == null || book.getYear() >= yearFrom)
                 .filter(book -> yearTo == null || book.getYear() <= yearTo)
                 .sorted((b1, b2) -> {
-                    int directionFactor = direction.equalsIgnoreCase("desc") ? -1 : 1;
-                    switch (finalSort) {
-                        case "title":
-                            return b1.getTitle().compareToIgnoreCase(b2.getTitle()) * directionFactor;
-                        case "year":
-                            return Integer.compare(b1.getYear(), b2.getYear()) * directionFactor;
-                        case "category":
-                            return b1.getCategory().compareTo(b2.getCategory()) * directionFactor;
-                        case "id":
-                        default:
-                            return b1.getId().compareTo(b2.getId()) * directionFactor;
-                    }
+                    int factor = "desc".equalsIgnoreCase(direction) ? -1 : 1;
+                    return switch (finalSort) {
+                        case "title" -> b1.getTitle().compareToIgnoreCase(b2.getTitle()) * factor;
+                        case "year" -> Integer.compare(b1.getYear(), b2.getYear()) * factor;
+                        case "category" -> b1.getCategory().compareTo(b2.getCategory()) * factor;
+                        case "id" -> b1.getId().compareTo(b2.getId()) * factor;
+                        default -> 0;
+                    };
                 })
-                .collect(Collectors.toList());
+                .toList();
+
+        if (page == null || page < 0) page = 0;
+        if (size == null || size <= 0) size = 10;
+
+        int fromIndex = page * size;
+        if (fromIndex >= filtered.size()) return List.of();
+
+        int toIndex = Math.min(fromIndex + size, filtered.size());
+
+        return filtered.subList(fromIndex, toIndex);
     }
 }

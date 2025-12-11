@@ -49,9 +49,11 @@ public class BookController {
             @RequestParam(required = false) Integer yearFrom,
             @RequestParam(required = false) Integer yearTo,
             @RequestParam(defaultValue = "title") String sort,
-            @RequestParam(defaultValue = "asc") String direction
+            @RequestParam(defaultValue = "asc") String direction,
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer size
     ) {
-        Iterable<Book> books = bookService.getBooks(title, authorId, category, yearFrom, yearTo, sort, direction);
+        Iterable<Book> books = bookService.getBooks(title, authorId, category, yearFrom, yearTo, sort, direction, page, size);
 
         return (List<Book>) books;
     }
